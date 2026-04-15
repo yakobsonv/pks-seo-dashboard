@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SEO-оптимизация pksystems.ru — Дашборд проекта</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#0f1117;--card:#1a1d27;--border:#2a2d3a;
+  --text:#e4e4e7;--muted:#9ca3af;--accent:#3b82f6;
+  --green:#22c55e;--yellow:#eab308;--red:#ef4444;--orange:#f97316;
+  --purple:#a855f7;
+}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;min-height:100vh}
+.container{max-width:1280px;margin:0 auto;padding:24px 20px}
+.header{display:flex;align-items:center;justify-content:space-between;padding:24px 0;border-bottom:1px solid var(--border);margin-bottom:32px;flex-wrap:wrap;gap:16px}
+.header-left h1{font-size:24px;font-weight:700;letter-spacing:-0.5px}
+.header-left p{color:var(--muted);font-size:14px;margin-top:4px}
+.header-right{display:flex;gap:12px;align-items:center}
+.badge{padding:6px 14px;border-radius:20px;font-size:12px;font-weight:600;letter-spacing:0.5px}
+.badge-blue{background:rgba(59,130,246,.15);color:var(--accent)}
+.badge-green{background:rgba(34,197,94,.15);color:var(--green)}
+.update-date{color:var(--muted);font-size:12px}
+.summary{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-bottom:32px}
+.stat-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px;transition:transform .2s}
+.stat-card:hover{transform:translateY(-2px)}
+.stat-card .label{font-size:12px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:8px}
+.stat-card .value{font-size:36px;font-weight:700}
+.stat-card .sub{font-size:13px;color:var(--muted);margin-top:4px}
+.val-green{color:var(--green)}.val-yellow{color:var(--yellow)}.val-blue{color:var(--accent)}.val-red{color:var(--red)}.val-purple{color:var(--purple)}
+.progress-section{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:24px;margin-bottom:32px}
+.progress-section h2{font-size:18px;margin-bottom:16px}
+.progress-bar-bg{background:#2a2d3a;border-radius:8px;height:12px;overflow:hidden;margin-bottom:8px}
+.progress-bar-fill{height:100%;border-radius:8px;transition:width 1s ease;background:linear-gradient(90deg,var(--accent),var(--purple))}
+.progress-labels{display:flex;justify-content:space-between;font-size:13px;color:var(--muted)}
+.timeline{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:24px;margin-bottom:32px}
+.timeline h2{font-size:18px;margin-bottom:20px}
+.phase-list{display:flex;flex-direction:column;gap:0}
+.phase{display:grid;grid-template-columns:40px 1fr;gap:16px;position:relative;padding-bottom:24px}
+.phase:last-child{padding-bottom:0}
+.phase:not(:last-child)::before{content:'';position:absolute;left:19px;top:36px;bottom:0;width:2px;background:var(--border)}
+.phase-icon{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;z-index:1}
+.phase-icon.done{background:rgba(34,197,94,.2);color:var(--green);border:2px solid var(--green)}
+.phase-icon.active{background:rgba(59,130,246,.2);color:var(--accent);border:2px solid var(--accent);animation:pulse 2s infinite}
+.phase-icon.pending{background:rgba(156,163,175,.1);color:var(--muted);border:2px solid var(--border)}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(59,130,246,.3)}50%{box-shadow:0 0 0 8px rgba(59,130,246,0)}}
+.phase-content h3{font-size:15px;font-weight:600;margin-bottom:4px}
+.phase-content p{font-size:13px;color:var(--muted)}
+.phase-content .phase-date{font-size:12px;color:var(--accent);font-weight:500;margin-top:4px}
+.audit{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:24px;margin-bottom:32px}
+.audit h2{font-size:18px;margin-bottom:16px}
+.audit-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px}
+.audit-item{display:flex;align-items:flex-start;gap:12px;padding:14px;background:rgba(255,255,255,.02);border-radius:8px;border:1px solid var(--border)}
+.audit-icon{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+.audit-icon.critical{background:rgba(239,68,68,.15);color:var(--red)}
+.audit-icon.warning{background:rgba(234,179,8,.15);color:var(--yellow)}
+.audit-icon.ok{background:rgba(34,197,94,.15);color:var(--green)}
+.audit-item h4{font-size:14px;font-weight:600;margin-bottom:2px}
+.audit-item p{font-size:12px;color:var(--muted)}
+.clusters{margin-bottom:32px}
+.clusters h2{font-size:18px;margin-bottom:16px}
+.cluster-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(380px,1fr));gap:12px}
+.cluster-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px;transition:transform .2s}
+.cluster-card:hover{transform:translateY(-2px)}
+.cluster-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px;gap:8px}
+.cluster-header h3{font-size:15px;font-weight:600;flex:1}
+.cluster-badge{padding:4px 10px;border-radius:12px;font-size:11px;font-weight:600;white-space:nowrap}
+.cluster-badge.high{background:rgba(239,68,68,.15);color:var(--red)}
+.cluster-badge.medium{background:rgba(234,179,8,.15);color:var(--yellow)}
+.cluster-badge.low{background:rgba(156,163,175,.15);color:var(--muted)}
+.cluster-stats{display:flex;gap:16px;margin-bottom:12px;font-size:13px}
+.cluster-stats span{display:flex;align-items:center;gap:4px}
+.dot{width:8px;height:8px;border-radius:50%;display:inline-block}
+.dot-green{background:var(--green)}.dot-yellow{background:var(--yellow)}.dot-blue{background:var(--accent)}.dot-red{background:var(--red)}
+.cluster-bar{background:#2a2d3a;border-radius:6px;height:6px;overflow:hidden}
+.cluster-bar-inner{display:flex;height:100%}
+.cluster-bar-done{background:var(--green)}
+.cluster-bar-rework{background:var(--yellow)}
+.cluster-bar-new{background:var(--border)}
+.cluster-desc{font-size:12px;color:var(--muted);margin-top:8px}
+.scores{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:24px;margin-bottom:32px}
+.scores h2{font-size:18px;margin-bottom:16px}
+.score-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px}
+.score-item{text-align:center;padding:16px;background:rgba(255,255,255,.02);border-radius:8px;border:1px solid var(--border)}
+.score-ring{width:72px;height:72px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 8px;font-size:20px;font-weight:700;position:relative}
+.score-ring::before{content:'';position:absolute;inset:0;border-radius:50%;border:4px solid var(--border)}
+.score-ring::after{content:'';position:absolute;inset:0;border-radius:50%;border:4px solid transparent}
+.score-ring.good{color:var(--green)}.score-ring.good::after{border-top-color:var(--green);border-right-color:var(--green);border-bottom-color:var(--green)}
+.score-ring.warn{color:var(--yellow)}.score-ring.warn::after{border-top-color:var(--yellow);border-right-color:var(--yellow)}
+.score-ring.bad{color:var(--red)}.score-ring.bad::after{border-top-color:var(--red)}
+.score-item .score-label{font-size:12px;color:var(--muted)}
+.footer{text-align:center;padding:24px 0;border-top:1px solid var(--border);margin-top:32px;color:var(--muted);font-size:12px}
+@media(max-width:768px){.container{padding:16px 12px}.header{flex-direction:column;align-items:flex-start}.summary{grid-template-columns:repeat(2,1fr)}.cluster-grid{grid-template-columns:1fr}.score-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:480px){.summary{grid-template-columns:1fr}.audit-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="container">
+<div class="header">
+  <div class="header-left">
+    <h1>SEO-оптимизация pksystems.ru</h1>
+    <p>Промышленные Конвейерные Системы — план работ и прогресс</p>
+  </div>
+  <div class="header-right">
+    <span class="badge badge-blue">Апрель 2026</span>
+    <span class="badge badge-green">Аудит завершён</span>
+    <span class="update-date">Обновлено: 15.04.2026</span>
+  </div>
+</div>
+
+<div class="summary">
+  <div class="stat-card"><div class="label">Всего страниц</div><div class="value val-blue">108</div><div class="sub">в 12 кластерах</div></div>
+  <div class="stat-card"><div class="label">Существуют</div><div class="value val-green">50</div><div class="sub">оптимизация SEO</div></div>
+  <div class="stat-card"><div class="label">Создать</div><div class="value val-yellow">54</div><div class="sub">новые страницы</div></div>
+  <div class="stat-card"><div class="label">Переписать</div><div class="value val-purple">4</div><div class="sub">хабы кластеров</div></div>
+  <div class="stat-card"><div class="label">Проблем осталось</div><div class="value val-red">10</div><div class="sub">из 12 найденных</div></div>
+</div>
+
+<div class="progress-section">
+  <h2>Общий прогресс — Апрель 2026</h2>
+  <div style="margin-top:12px">
+    <div style="display:flex;justify-content:space-between;margin-bottom:6px">
+      <span style="font-size:14px;font-weight:600">Этап 1: Аудит и техническая подготовка</span>
+      <span style="font-size:14px;font-weight:600;color:var(--green)">62%</span>
+    </div>
+    <div class="progress-bar-bg"><div class="progress-bar-fill" style="width:62%"></div></div>
+    <div class="progress-labels"><span>Разведка ✓ Аудит ✓ Meta-теги (6/18 страниц)</span><span>Цель: к 30 апреля</span></div>
+  </div>
+  <div style="margin-top:20px">
+    <div style="display:flex;justify-content:space-between;margin-bottom:6px">
+      <span style="font-size:14px;font-weight:600">Этап 2: Оптимизация существующих страниц</span>
+      <span style="font-size:14px;font-weight:600;color:var(--muted)">0%</span>
+    </div>
+    <div class="progress-bar-bg"><div class="progress-bar-fill" style="width:0%"></div></div>
+    <div class="progress-labels"><span>Ожидает</span><span>Апрель</span></div>
+  </div>
+  <div style="margin-top:20px">
+    <div style="display:flex;justify-content:space-between;margin-bottom:6px">
+      <span style="font-size:14px;font-weight:600">Этап 3: Создание новых страниц</span>
+      <span style="font-size:14px;font-weight:600;color:var(--muted)">0%</span>
+    </div>
+    <div class="progress-bar-bg"><div class="progress-bar-fill" style="width:0%"></div></div>
+    <div class="progress-labels"><span>54 новые страницы</span><span>Май — Август</span></div>
+  </div>
+</div>
+
+<div class="timeline">
+  <h2>План работ — Апрель</h2>
+  <div class="phase-list">
+    <div class="phase"><div class="phase-icon done">✓</div><div class="phase-content"><h3>Разведка сайта и сбор данных</h3><p>Анализ WordPress API, категорий, постов, страниц. Определение темы, плагинов, структуры.</p><div class="phase-date">Завершено 10 апреля</div></div></div>
+    <div class="phase"><div class="phase-icon done">✓</div><div class="phase-content"><h3>Полный SEO-аудит всех страниц</h3><p>Проверка title, meta description, H1, alt-тегов, Schema.org, внутренней перелинковки на каждой странице.</p><div class="phase-date">Завершено 12 апреля</div></div></div>
+    <div class="phase"><div class="phase-icon active">3</div><div class="phase-content"><h3>Исправление критических проблем</h3><p>Robots.txt, мета-теги главной, alt-теги изображений, Schema.org Product и FAQ. Meta: 6/18 страниц готово.</p><div class="phase-date">13 — 17 апреля · В процессе</div></div></div>
+    <div class="phase"><div class="phase-icon pending">4</div><div class="phase-content"><h3>Оптимизация контента существующих страниц</h3><p>Улучшение заголовков, добавление FAQ-блоков, усиление E-E-A-T, внутренняя перелинковка.</p><div class="phase-date">18 — 25 апреля</div></div></div>
+    <div class="phase"><div class="phase-icon pending">5</div><div class="phase-content"><h3>QC-аудит и финализация</h3><p>Проверка каждой оптимизированной страницы по 10 критериям. Порог: 90/100.</p><div class="phase-date">25 — 30 апреля</div></div></div>
+  </div>
+</div>
+
+<div class="audit">
+  <h2>Результаты аудита сайта</h2>
+  <div class="audit-grid">
+    <div class="audit-item"><div class="audit-icon ok">✓</div><div><h4>Главная: meta description заполнен</h4><p>Исправлено 13.04 — на главной теперь корректное описание для поисковой выдачи</p></div></div>
+    <div class="audit-item"><div class="audit-icon critical">!</div><div><h4>FAQ Schema — 2 из 78 страниц</h4><p>Расширенные сниппеты в поиске отсутствуют практически на всех страницах</p></div></div>
+    <div class="audit-item"><div class="audit-icon critical">!</div><div><h4>Product Schema отсутствует</h4><p>Продуктовые страницы не размечены как товары — теряем карточки в поиске</p></div></div>
+    <div class="audit-item"><div class="audit-icon critical">!</div><div><h4>Изображения без alt-тегов</h4><p>~40% из 1792 изображений без описания — теряем трафик из картинок и доступность</p></div></div>
+    <div class="audit-item"><div class="audit-icon warning">⚠</div><div><h4>Robots.txt требует очистки</h4><p>Мусорные правила, заблокирован WP JSON API, блокируются параметризованные URL</p></div></div>
+    <div class="audit-item"><div class="audit-icon warning">⚠</div><div><h4>12 страниц без meta description</h4><p>15.04 — ещё 5 страниц закрыто (Доставка, опросные листы). Осталось 12: 8 мультиязычных + 4 технических.</p></div></div>
+    <div class="audit-item"><div class="audit-icon warning">⚠</div><div><h4>Плоская структура заголовков</h4><p>Нет H3/H4 уровней — страницы не используют полную иерархию для SEO</p></div></div>
+    <div class="audit-item"><div class="audit-icon ok">✓</div><div><h4>Yoast SEO настроен</h4><p>v26.8, title и canonical заполнены на всех 78 записях</p></div></div>
+    <div class="audit-item"><div class="audit-icon ok">✓</div><div><h4>Sitemap генерируется</h4><p>5 XML-карт через Yoast, обновляются автоматически</p></div></div>
+    <div class="audit-item"><div class="audit-icon ok">✓</div><div><h4>OG-разметка на месте</h4><p>Open Graph теги (заголовок, описание, картинка) на всех записях</p></div></div>
+    <div class="audit-item"><div class="audit-icon ok">✓</div><div><h4>LocalBusiness Schema</h4><p>Разметка организации присутствует на всех страницах</p></div></div>
+    <div class="audit-item"><div class="audit-icon ok">✓</div><div><h4>HTTPS и canonical</h4><p>Сайт работает по HTTPS, canonical URL корректны</p></div></div>
+  </div>
+</div>
+
+<div class="scores">
+  <h2>SEO-здоровье сайта</h2>
+  <div class="score-grid">
+    <div class="score-item"><div class="score-ring warn">78</div><div class="score-label">Мета-теги</div></div>
+    <div class="score-item"><div class="score-ring bad">30</div><div class="score-label">Schema.org</div></div>
+    <div class="score-item"><div class="score-ring warn">55</div><div class="score-label">Изображения</div></div>
+    <div class="score-item"><div class="score-ring good">85</div><div class="score-label">Canonical/OG</div></div>
+    <div class="score-item"><div class="score-ring warn">50</div><div class="score-label">Контент</div></div>
+    <div class="score-item"><div class="score-ring bad">35</div><div class="score-label">Перелинковка</div></div>
+  </div>
+</div>
+
+<div class="clusters">
+  <h2>12 кластеров — стратегия SEO-покрытия</h2>
+  <div class="cluster-grid">
+    <div class="cluster-card"><div class="cluster-header"><h3>1. Ленточные конвейеры — главный хаб</h3><span class="cluster-badge high">Высокий</span></div><div class="cluster-stats"><span><span class="dot dot-green"></span> 1 есть</span><span><span class="dot dot-red"></span> 1 переписать</span><span><span class="dot dot-blue"></span> 6 создать</span></div><div class="cluster-bar"><div class="cluster-bar-inner"><div class="cluster-bar-done" style="width:12.5%"></div><div class="cluster-bar-rework" style="width:12.5%"></div><div class="cluster-bar-new" style="width:75%"></div></div></div><div class="cluster-desc">Хаб + коммерческие + обзорные. Стоимость, заказ, виды, применение, стыковка, производство.</div></div>
+    <div class="cluster-card"><div class="cluster-header"><h3>2. Разборные модульные — платформа ССК</h3><span class="cluster-badge high">Высокий</span></div><div class="cluster-stats"><span><span class="dot dot-green"></span> 1 есть</span><span><span class="dot dot-red"></span> 1 переписать</span><span><span class="dot dot-blue"></span> 7 создать</span></div><div class="cluster-bar"><div class="cluster-bar-inner"><div class="cluster-bar-done" style="width:11%"></div><div class="cluster-bar-rework" style="width:11%"></div><div class="cluster-bar-new" style="width:78%"></div></div></div><div class="cluster-desc">Стратегическое ядро. Конструктор-аналог немецких систем: без сварки, быстрый монтаж.</div></div>
+    <div class="cluster-card"><div class="cluster-header"><h3>3. Прямые конвейеры — штучные грузы</h3><span class="cluster-badge high">Высокий</span></div><div class="cluster-stats"><span><span class="dot dot-green"></span> 8 есть</span><span><span class="dot dot-red"></span> 1 переписать</span><span><span class="dot dot-blue"></span> 2 создать</span></div><div class="cluster-bar"><div class="cluster-bar-inner"><div class="cluster-bar-done" style="width:73%"></div><div class="cluster-bar-rework" style="width:9%"></div><div class="cluster-bar-new" style="width:18%"></div></div></div><div class="cluster-desc">Ролики или слайд-стол. Мешки, коробки, бутылки, упаковка, склад, пищевое, мусор.</div></div>
+    <div class="cluster-card"><div class="cluster-header"><h3>4. Желобчатые — сыпучие материалы</h3><span class="cluster-badge high">Высокий</span></div><div class="cluster-stats"><span><span class="dot dot-green"></span> 7 есть</span><span><span class="dot dot-red"></span> 1 переписать</span><span><span class="dot dot-blue"></span> 7 создать</span></div><div class="cluster-bar"><div class="cluster-bar-inner"><div class="cluster-bar-done" style="width:47%"></div><div class="cluster-bar-rework" style="width:7%"></div><div class="cluster-bar-new" style="width:46%"></div></div></div><div class="cluster-desc">Максимальный кластер: песок, руда, уголь, бетон, грунт, зерно, щебень, опилки, стройматериалы.</div></div>
+    <div class="cluster-card"><div class="cluster-header"><h3>5. Z/L-образные, наклонные, закрытые</h3><span class="cluster-badge high">Высокий</span></div><div class="cluster-stats"><span><span class="dot dot-green"></span> 3 есть</span><span><span class="dot dot-blue"></span> 6 создать</span></div><div class="cluster-bar"><div class="cluster-bar-inner"><div class="cluster-bar-done" style="width:33%"></div><div class="cluster-bar-new" style="width:67%"></div></div></div><div class="cluster-desc">Подъём грузов, гофробортовые ленты. Закрытые для цемента — есть в презентации, нет на сайте!</div></div>
+    <div class="cluster-card"><div class="cluster-header"><h3>6. Телескопические конвейеры</h3><span class="cluster-badge medium">Средний</span></div><div class="cluster-stats"><span><span class="dot dot-green"></span> 1 есть</span><span><span class="dot dot-blue"></span> 6 создать</span></div><div class="cluster-bar"><div class="cluster-bar-inner"><div class="cluster-bar-done" style="width:14%"></div><div class="cluster-bar-new" style="width:86%"></div></div></div><div class="cluster-desc">Погрузка/разгрузка контейнеров и фур. Конкуренция с Китаем, от 3 млн.</div></div>
+    <div class="cluster-card"><div class="cluster-header"><h3>7. Передвижные и штабелеукладчики</h3><span class="cluster-badge medium">Средний</span></div><div class="cluster-stats"><span><span class="dot dot-green"></span> 2 есть</span><span><span class="dot dot-blue"></span> 4 создать</span></div><div class="cluster-bar"><div class="cluster-bar-inner"><div class="cluster-bar-done" style="width:33%"></div><div class="cluster-bar-new" style="width:67%"></div></div></div><div class="cluster-desc">Мобильность, стройка, склад. Не связаны с телескопическими.</div></div>
+    <div class="cluster-card"><div class="cluster-header"><h3>8. Шнековые конвейеры</h3><span class="cluster-badge medium">Средний</span></div><div class="cluster-stats"><span><span class="dot dot-green"></span> 9 есть</span><span><span class="dot dot-blue"></span> 4 создать</span></div><div class="cluster-bar"><div class="cluster-bar-inner"><div class="cluster-bar-done" style="width:69%"></div><div class="cluster-bar-new" style="width:31%"></div></div></div><div class="cluster-desc">Осевые, безосевые, гибкие. Разгрузчики хопперов — серийный продукт 1,57 млн.</div></div>
+    <div class="cluster-card"><div class="cluster-header"><h3>9. Устройство, расчёт, эксплуатация</h3><span class="cluster-badge high">Высокий</span></div><div class="cluster-stats"><span><span class="dot dot-blue"></span> 8 создать</span></div><div class="cluster-bar"><div class="cluster-bar-inner"><div class="cluster-bar-new" style="width:100%"></div></div></div><div class="cluster-desc">Высокочастотные запросы: устройство, принцип работы, расчёт. Конкуренты в топе!</div></div>
+    <div class="cluster-card"><div class="cluster-header"><h3>10. Мешкопогрузчики — системы погрузки</h3><span class="cluster-badge high">Высокий</span></div><div class="cluster-stats"><span><span class="dot dot-green"></span> 5 есть</span><span><span class="dot dot-blue"></span> 3 создать</span></div><div class="cluster-bar"><div class="cluster-bar-inner"><div class="cluster-bar-done" style="width:62%"></div><div class="cluster-bar-new" style="width:38%"></div></div></div><div class="cluster-desc">Самое маржинальное направление. ПКС — единственные на пневмоходу.</div></div>
+    <div class="cluster-card"><div class="cluster-header"><h3>11. Системы разгрузки и мешкоразгрузчики</h3><span class="cluster-badge medium">Средний</span></div><div class="cluster-stats"><span><span class="dot dot-green"></span> 3 есть</span><span><span class="dot dot-blue"></span> 4 создать</span></div><div class="cluster-bar"><div class="cluster-bar-inner"><div class="cluster-bar-done" style="width:43%"></div><div class="cluster-bar-new" style="width:57%"></div></div></div><div class="cluster-desc">Разгрузчики вагонов + новое: мешкоразгрузчики с роботизированной укладкой.</div></div>
+    <div class="cluster-card"><div class="cluster-header"><h3>12. Скребковые, питатели, затворы</h3><span class="cluster-badge low">Низкий</span></div><div class="cluster-stats"><span><span class="dot dot-green"></span> 13 есть</span><span><span class="dot dot-blue"></span> 2 создать</span></div><div class="cluster-bar"><div class="cluster-bar-inner"><div class="cluster-bar-done" style="width:87%"></div><div class="cluster-bar-new" style="width:13%"></div></div></div><div class="cluster-desc">Низкий приоритет. Скребковые трудоёмки, питатели ППЛ — поддерживаем.</div></div>
+  </div>
+</div>
+
+<div class="footer">
+  <p>SEO-проект pksystems.ru — Дашборд автоматически обновляется по мере работы</p>
+  <p style="margin-top:4px">По вопросам: Влад</p>
+</div>
+
+</div>
+</body>
+</html>
